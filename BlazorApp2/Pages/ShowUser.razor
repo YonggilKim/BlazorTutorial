@@ -1,0 +1,45 @@
+﻿@using BlazorApp2.Data
+
+<p>
+    Users : <b>@Users.Count()</b>
+</p>
+
+<br />
+
+<ul class="list-group">
+    @foreach (UserData user in Users)
+    {   
+        <li @key = "user" class="list-group-item">
+            <button type="button" class="btn btn-link" @onclick="()=>RemoveUser(user)">Kick</button>
+            <label>@user.Name</label>
+        </li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public List<UserData> Users { get; set; }
+
+    [Parameter]
+    public EventCallback CallbackTest { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Users.Add(new UserData() { Name = "Rookiss" });
+        Users.Add(new UserData() { Name = "Faker" });
+        Users.Add(new UserData() { Name = "Deft" });
+    }
+
+    public void AddUser(UserData user)
+    {
+        Users.Add(user);
+
+    }
+    public void RemoveUser(UserData user)
+    {
+        Users.Remove(user);
+        //만약 인자가 있는경우 null 대신 인자를 넣으면 된다.
+        CallbackTest.InvokeAsync(null);
+    }
+}

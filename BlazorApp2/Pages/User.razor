@@ -3,22 +3,8 @@
 @using BlazorApp2.Data
 
 <h3>Online Users</h3>
-<p>
-    Users : <b>@_users.Count()</b>
-</p>
 
-<br />
-
-<ul class="list-group">
-    @foreach (UserData user in _users)
-    {   //
-            <li @key = "user" class="list-group-item">
-                <button type="button" class="btn btn-link" @onclick="()=>RemoveUser(user)">Kick</button>
-                <label>@user.Name</label>
-            </li>
-    }
-</ul>
-
+<ShowUser Users="_users" CallbackTest="CallbackTestFunc" @ref="_showUser"></ShowUser>
 <br />
 
 <div class="container">
@@ -36,28 +22,22 @@
 
 @code {
     List<UserData> _users = new List<UserData>();
+    ShowUser _showUser;
+
     string _inputName;
     string _btnClass = "btn btn-primary";
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        _users.Add(new UserData() { Name = "Rookiss" });
-        _users.Add(new UserData() { Name = "Faker" });
-        _users.Add(new UserData() { Name = "Deft" });
-        RefreshButton();
-    }
 
-    void AddUser()
+
+    public void AddUser()
     {
-        _users.Add(new UserData() { Name = _inputName });
+        _showUser.AddUser(new UserData() { Name = _inputName });
         _inputName = "";
         RefreshButton();
-
     }
-    void RemoveUser(UserData user)
+    public void RemoveUser(UserData user)
     {
-        _users.Remove(user);
+        _showUser.RemoveUser(user);
         RefreshButton();
     }
 
@@ -68,5 +48,11 @@
         else
             _btnClass = "btn btn-secondary";
 
+    }
+
+    void CallbackTestFunc()
+    {
+        _inputName = "callbackTest";
+        // StateHasChanged();
     }
 }

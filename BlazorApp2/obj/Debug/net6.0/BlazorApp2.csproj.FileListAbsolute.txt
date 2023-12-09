@@ -60,3 +60,4 @@ D:\BlazorTutorial\BlazorApp2\obj\Debug\net6.0\refint\BlazorApp2.dll
 D:\BlazorTutorial\BlazorApp2\obj\Debug\net6.0\BlazorApp2.pdb
 D:\BlazorTutorial\BlazorApp2\obj\Debug\net6.0\BlazorApp2.genruntimeconfig.cache
 D:\BlazorTutorial\BlazorApp2\obj\Debug\net6.0\ref\BlazorApp2.dll
+D:\BlazorTutorial\BlazorApp2\obj\Debug\net6.0\BlazorApp2.sourcelink.json
